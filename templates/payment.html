@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Options</title>
+  <style>
+    body {
+      background-color: #ffff;
+      color: black;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #ffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,135,255,0.9);
+      width: 400px;
+    }
+    .container h2 {
+      text-align: center;
+      color: rgba(0,135,255,0.9);
+      margin-bottom: 20px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: white;
+      border: 1px solid rgba(0,135,255,0.9);
+      border-radius: 5px;
+      color: black;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .qr {
+      display: block;
+      margin: 10px auto;
+      width: 180px;
+      height: 180px;
+      border: 2px solid rgba(0,135,255,0.9);
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #FFCE1B;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #3cb371;
+    }
+   label {
+  font-weight: bold;
+  color: #000; /* or any valid color like rgba(0,135,255,0.9) */
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+  <h2>Make Payment</h2>
+
+  <!-- Start of the form -->
+  <form action="/submit" method="POST">
+    <div class="section">
+      <label>Your Details</label>
+      <input type="text" name="name" placeholder="Enter your name">
+      <input type="text" name="phone" placeholder="Enter phone no">
+    </div>
+
+    <div class="section">
+      <label>QR Payment</label>
+      <p>Scan QR code below:</p>
+      <img src="{{ url_for('static', filename='qr.png') }}" alt="QR" class="qr">
+    </div>
+
+    <button class="btn" type="submit">Confirm Payment</button>
+  </form>
+  <!-- End of the form -->
+
+  <!-- Flash messages (optional) -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul style="color: green; text-align: center;">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+</div>
+
+
+  <script>
+    function submitForm() {
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (name === "" || phone === "") {
+        alert("Please fill in all details before submitting.");
+        return;
+      }
+
+      // Simulate successful submission
+      alert("Registered successfully!");
+
+      // Optionally clear the form
+      document.getElementById("name").value = "";
+      document.getElementById("phone").value = "";
+    }
+  </script>
+
+
+</body>
+
+
+</html>
+
